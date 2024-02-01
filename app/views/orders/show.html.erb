@@ -1,0 +1,20 @@
+<h1>Order <%= @order.id %></h1>
+
+<ul>Customer name: <%= @order.customer_name %></ul>
+<ul>Customer phone: <%= @order.customer_phone %></ul>
+<ul>Customer email: <%= @order.customer_email %></ul>
+<ul>Delivery address: <%= @order.delivery_address %></ul>
+<ul>Total sum: <%= @order.total_sum %></ul>
+<ul>Status: <%= @order.status %></ul>
+<% if @order.payment_system_metadata.present? %>
+  <ul>Payment system metadata: <%= @order.payment_system_metadata %></ul>
+<% end %>
+<div class="col-md-3">
+  <%= button_to "Оплатить", action: 'checkout', params: { order_id: @order.id } %>
+</div>
+<h2>Items</h2>
+<div>
+  <% @order.order_items.each do |item| %>
+    <li>Title: <%= item.name %> Price: <%= item.total_sum %></li>
+  <% end %>
+</div>
